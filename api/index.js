@@ -10,7 +10,7 @@ app.use(cookieParser());
 // routes
 app.use("/api/auth", authRoutes);
 
-const port = 4000;
+const port = process.env.PORT || 4000;
 app.listen(port, () => {
   connectDb();
   console.log(`listening on http://localhost:${port}`);
