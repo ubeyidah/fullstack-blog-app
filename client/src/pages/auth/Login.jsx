@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 const Login = () => {
   return (
     <section>
-      <form className="max-w-sm mx-auto space-y-3 flex flex-col mt-14">
+      <form className="max-w-sm mx-auto gap-5 flex flex-col mt-14">
         <h1 className="text-center text-3xl font-semibold ">
           <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
             Welcome to Blogify
           </span>
           👏
         </h1>
-        <p className="py-4 mb-6  text-gray-500  text-sm text-center">
+        <p className="py-4 mb-1  text-gray-500  text-sm text-center">
           Log in to your Blogify account to start sharing your thoughts and
           connecting with the community
         </p>
