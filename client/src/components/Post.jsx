@@ -27,9 +27,7 @@ const Post = () => {
             nobis alias dignissimos commodi.
           </p>
           <div className="mt-5 sm:mt-auto">
-            <p className="text-xs text-gray-500 ">
-              <Link>@mozila</Link> 02/12/2022
-            </p>
+            <p className="text-xs text-gray-500 ">@mozila - 02/12/2022</p>
           </div>
         </div>
       </div>
