@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Joi from "joi";
 import { toast } from "react-hot-toast";
 import { signupUser } from "../../utils/api.js";
@@ -29,6 +29,7 @@ const signUpschema = Joi.object({
 
 const Signup = () => {
   const [loading, setLoading] = React.useState(false);
+  const navigate = useNavigate();
   const [signupData, setSignupData] = React.useState({
     userName: "",
     email: "",
@@ -50,6 +51,7 @@ const Signup = () => {
       setSessionStorageItem(data);
       setUser(data);
       toast.success("Sign up successfull");
+      navigate("/");
     } catch (error) {
       toast.error(error.message);
     } finally {

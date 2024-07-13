@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { loginUser } from "../../utils/api.js";
 import Joi from "joi";
@@ -29,6 +29,7 @@ const loginSchema = Joi.object({
 const Login = () => {
   const [loginData, setLoginData] = React.useState({ email: "", password: "" });
   const [loading, setLoading] = React.useState(false);
+  const navigate = useNavigate();
   const { setUser } = useAuthContext();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,6 +47,7 @@ const Login = () => {
       setUser(data);
       // console.log(data);
       toast.success("Login successfull");
+      navigate("/");
     } catch (error) {
       toast.error(error.message);
     } finally {
