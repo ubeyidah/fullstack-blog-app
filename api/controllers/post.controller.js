@@ -49,4 +49,18 @@ const getPosts = async (req, res) => {
   }
 };
 
-export { createPost, getPosts };
+const getPost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const post = await Posts.findById(id).populate("author", [
+      "userName",
+      "email",
+    ]);
+    res.status(200).json(post);
+  } catch (error) {
+    console.log("error on get post", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export { createPost, getPosts, getPost };
