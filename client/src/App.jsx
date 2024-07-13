@@ -9,6 +9,7 @@ import Notification from "./pages/auth/Notification";
 import WritePost from "./pages/post/WritePost";
 import PublicRoute from "./components/layouts/auth/PublicRoute";
 import PrivetRoute from "./components/layouts/auth/PrivetRoute";
+import PostDetail from "./pages/post/PostDetail";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Posts />} />
+          <Route path="/:username/:id" element={<PostDetail />} />
           <Route element={<PublicRoute />}>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />

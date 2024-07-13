@@ -68,3 +68,13 @@ export const getPosts = async () => {
   }
   return data;
 };
+export const getPost = async (id) => {
+  const res = await fetch(`/api/post/${id}`);
+  const data = await res.json();
+  if (!res.ok) {
+    throw {
+      message: data.message,
+    };
+  }
+  return data;
+};

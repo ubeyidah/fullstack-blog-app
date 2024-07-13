@@ -7,3 +7,16 @@
   margin: 0 auto;
   padding: 0 16px;
 }
+
+ul {
+  list-style: disc;
+  padding: 0 18px;
+}
+ol {
+  list-style: decimal;
+  padding: 0 18px;
+}
+.content a {
+  color: blue;
+  text-decoration: underline;
+}
