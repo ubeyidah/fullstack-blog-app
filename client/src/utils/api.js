@@ -1,0 +1,47 @@
+export const signupUser = async (userData) => {
+  const res = await fetch("/api/auth/signup", {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw {
+      message: data.message,
+    };
+  }
+  return data;
+};
+export const loginUser = async (userData) => {
+  const res = await fetch("/api/auth/login", {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw {
+      message: data.message,
+    };
+  }
+  return data;
+};
+export const logoutUser = async () => {
+  const res = await fetch("/api/auth/logout", {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw {
+      message: data.message,
+    };
+  }
+  return data;
+};
