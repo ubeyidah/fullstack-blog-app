@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { loginUser } from "../../utils/api.js";
 import Joi from "joi";
@@ -29,12 +29,16 @@ const loginSchema = Joi.object({
 const Login = () => {
   const [loginData, setLoginData] = React.useState({ email: "", password: "" });
   const [loading, setLoading] = React.useState(false);
+
   const navigate = useNavigate();
   const { setUser } = useAuthContext();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLoginData((prev) => ({ ...prev, [name]: value }));
   };
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const message = searchParams.get("message");
   const submitUser = async (e) => {
     const toastId = toast.loading("Submitting...");
     setLoading(true);
@@ -67,10 +71,11 @@ const Login = () => {
           </span>
           👏
         </h1>
-        <p className="py-4 mb-1  text-gray-500  text-sm text-center">
+        <p className="py-3 mb-1  text-gray-500  text-sm text-center">
           Log in to your Blogify account to start sharing your thoughts and
           connecting with the community
         </p>
+        {message && <p className="text-center text-red-700">{message}</p>}
         <div className="relative mb-3">
           <input
             type="email"

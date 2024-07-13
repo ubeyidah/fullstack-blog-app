@@ -44,7 +44,7 @@ const Navbar = () => {
           <div className="hs-dropdown relative inline-flex items-center gap-3">
             <button
               type="button"
-              class="inline-flex flex-shrink-0 justify-center items-center size-10 rounded-full text-gray-500 hover:bg-slate-100  focus:z-10 focus:outline-none focus:ring-2 focus:ring-emerald-300-500"
+              className="inline-flex flex-shrink-0 justify-center items-center size-10 rounded-full text-gray-500 hover:bg-slate-100  focus:z-10 focus:outline-none focus:ring-2 focus:ring-emerald-300-500"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +100,27 @@ const Navbar = () => {
                   Profile
                 </Link>
                 <Link
-                  to="/create"
+                  to="/writePost"
+                  className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 "
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"
+                    />
+                  </svg>
+                  Write post
+                </Link>
+                <Link
+                  to="/notifications"
                   className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 "
                 >
                   <svg
@@ -117,27 +137,7 @@ const Navbar = () => {
                       d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
                     />
                   </svg>
-                  Notification
-                </Link>
-                <Link
-                  to="/create"
-                  className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 "
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="size-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12 4.5v15m7.5-7.5h-15"
-                    />
-                  </svg>
-                  Write post
+                  Notifications
                 </Link>
                 <div className="border-b my-1 border-slate-300"></div>
                 <button
