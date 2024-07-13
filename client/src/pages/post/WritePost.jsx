@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { writeNewPost } from "../../utils/api";
+import { useNavigate } from "react-router-dom";
 
 const modules = {
   toolbar: [
@@ -41,7 +42,7 @@ const WritePost = () => {
   const [postImage, setPostImage] = React.useState(null);
   const [imgPreview, setImgPreview] = React.useState(null);
   const [loading, setLoading] = React.useState(null);
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPostBody((prev) => ({ ...prev, [name]: value }));
@@ -72,6 +73,7 @@ const WritePost = () => {
       formData.set("image", postImage);
       await writeNewPost(formData);
       toast.success("Post published successfully.");
+      navigate("/");
     } catch (error) {
       toast.error(error.message);
     } finally {

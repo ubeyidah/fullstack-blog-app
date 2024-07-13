@@ -22,7 +22,7 @@ const createPost = async (req, res) => {
     }
     if (!authorInfo) return res.status(401).json({ message: "Unauthorized." });
     await Posts({
-      authorId: authorInfo._id,
+      author: authorInfo._id,
       title,
       summary,
       content,
@@ -35,4 +35,18 @@ const createPost = async (req, res) => {
   }
 };
 
-export { createPost };
+const getPosts = async (req, res) => {
+  try {
+    const posts = await Posts.find()
+      .populate("author", ["userName", "email"])
+      .sort({ createdAt: -1 })
+      .select("-content");
+    // .limit(2);
+    res.status(200).json(posts);
+  } catch (error) {
+    console.log("error on get posts", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export { createPost, getPosts };
