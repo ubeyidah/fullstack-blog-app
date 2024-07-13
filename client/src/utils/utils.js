@@ -28,3 +28,7 @@ export function getSessionStorageItem(key = "blogifyAuth") {
 
   return item.value;
 }
+
+export function removeSessionStorageItem(key = "blogifyAuth") {
+  sessionStorage.removeItem(key);
+}

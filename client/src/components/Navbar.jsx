@@ -1,8 +1,22 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useAuthContext } from "../context/AuthContext";
+import toast from "react-hot-toast";
+import { logoutUser } from "../utils/api";
+import { removeSessionStorageItem } from "../utils/utils";
 
 const Navbar = () => {
-  const user = false;
+  const { user, setUser } = useAuthContext();
+  const logout = async () => {
+    try {
+      await logoutUser();
+      setUser(null);
+      removeSessionStorageItem();
+      toast.success("Logged out successfully");
+    } catch (error) {
+      toast.error("Couldn't log out. please try again later!");
+    }
+  };
   return (
     <header className="container flex justify-between items-center h-16">
       <NavLink to="/" className="flex items-center justify-center gap-1">
@@ -33,7 +47,7 @@ const Navbar = () => {
               type="button"
               className="hs-dropdown-toggle w-10 h-10 text-lg text-white rounded-md  bg-gradient-to-bl from-emerald-200 to-emerald-600 font-bold uppercase  focus:ring-2"
             >
-              k
+              {user.userName[0]}
             </button>
 
             <div
@@ -41,9 +55,9 @@ const Navbar = () => {
               aria-labelledby="hs-dropdown-with-header"
             >
               <div className="py-3 px-5 -m-2 bg-gray-100 rounded-t-lg ">
-                <p className="text-sm text-gray-500 ">@james788 </p>
+                <p className="text-sm text-gray-500 ">@{user.userName} </p>
                 <p className="text-sm font-medium text-gray-800 ">
-                  james@site.com
+                  {user.email}
                 </p>
               </div>
               <div className="mt-2 py-2 first:pt-0 last:pb-0">
@@ -108,7 +122,10 @@ const Navbar = () => {
                   Write post
                 </Link>
                 <div className="border-b my-1 border-slate-300"></div>
-                <button className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 w-full">
+                <button
+                  onClick={logout}
+                  className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 w-full"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
