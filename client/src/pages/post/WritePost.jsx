@@ -65,7 +65,7 @@ const WritePost = () => {
       formData.set("summary", postBody.summary);
       formData.set("content", postBody.content);
       formData.set("image", postImage);
-      const res = await fetch("/api/auth/post", {
+      const res = await fetch("/api/post", {
         method: "POST",
         body: formData,
       });
