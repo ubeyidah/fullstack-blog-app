@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { loginUser } from "../../utils/api.js";
 import Joi from "joi";
+import { useAuthContext } from "../../context/AuthContext.jsx";
+import { setSessionStorageItem } from "../../utils/utils.js";
 
 const loginSchema = Joi.object({
   email: Joi.string()
@@ -26,19 +28,29 @@ const loginSchema = Joi.object({
 
 const Login = () => {
   const [loginData, setLoginData] = React.useState({ email: "", password: "" });
+  const [loading, setLoading] = React.useState(false);
+  const { setUser } = useAuthContext();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLoginData((prev) => ({ ...prev, [name]: value }));
   };
   const submitUser = async (e) => {
+    const toastId = toast.loading("Submitting...");
+    setLoading(true);
     try {
       e.preventDefault();
       const { error } = loginSchema.validate(loginData);
       if (error) throw { message: error.details[0].message };
       const data = await loginUser(loginData);
-      console.log(data);
+      setSessionStorageItem(data);
+      setUser(data);
+      // console.log(data);
+      toast.success("Login successfull");
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      toast.dismiss(toastId);
+      setLoading(false);
     }
   };
   return (
@@ -106,8 +118,9 @@ const Login = () => {
         <button
           type="submit"
           className="py-3 px-4  items-center gap-x-2 text-md  font-semibold rounded-lg border border-transparent bg-teal-100 text-teal-800 hover:bg-teal-200 disabled:opacity-50 disabled:pointer-events-none flex justify-center"
+          disabled={loading}
         >
-          Log in
+          {loading ? "Loading..." : "Log in"}
         </button>
         <p className="text-right">
           New to Blogify?{" "}
