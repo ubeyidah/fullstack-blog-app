@@ -45,3 +45,16 @@ export const logoutUser = async () => {
   }
   return data;
 };
+export const writeNewPost = async (postData) => {
+  const res = await fetch("/api/post", {
+    method: "POST",
+    body: postData,
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw {
+      message: data.message,
+    };
+  }
+  return data;
+};

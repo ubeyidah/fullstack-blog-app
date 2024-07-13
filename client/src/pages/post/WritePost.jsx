@@ -2,6 +2,7 @@ import React from "react";
 import toast from "react-hot-toast";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { writeNewPost } from "../../utils/api";
 
 const modules = {
   toolbar: [
@@ -39,6 +40,8 @@ const WritePost = () => {
   });
   const [postImage, setPostImage] = React.useState(null);
   const [imgPreview, setImgPreview] = React.useState(null);
+  const [loading, setLoading] = React.useState(null);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPostBody((prev) => ({ ...prev, [name]: value }));
@@ -50,6 +53,8 @@ const WritePost = () => {
     setImgPreview(imageUri);
   };
   const createNewPost = async (e) => {
+    const toastId = toast.loading("Publishing your post...");
+    setLoading(true);
     try {
       e.preventDefault();
       if (!postBody.title)
@@ -65,13 +70,13 @@ const WritePost = () => {
       formData.set("summary", postBody.summary);
       formData.set("content", postBody.content);
       formData.set("image", postImage);
-      const res = await fetch("/api/post", {
-        method: "POST",
-        body: formData,
-      });
-      console.log(res);
+      await writeNewPost(formData);
+      toast.success("Post published successfully.");
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      toast.dismiss(toastId);
+      setLoading(false);
     }
   };
   return (
@@ -172,8 +177,9 @@ const WritePost = () => {
         <button
           type="submit"
           className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-100 text-blue-800 disabled:opacity-50 disabled:pointer-events-none justify-center hover:opacity-80"
+          disabled={loading}
         >
-          Publish your post
+          {loading ? "Loading..." : "Publish your post"}
         </button>
       </form>
     </section>
