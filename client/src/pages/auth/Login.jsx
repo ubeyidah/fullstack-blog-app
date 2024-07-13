@@ -1,10 +1,52 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { loginUser } from "../../utils/api.js";
+import Joi from "joi";
+
+const loginSchema = Joi.object({
+  email: Joi.string()
+    .email({
+      minDomainSegments: 2,
+      tlds: { allow: ["com", "net"] },
+    })
+    .required(),
+  password: Joi.string()
+    .min(8)
+    .max(30)
+    .pattern(
+      new RegExp(
+        "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()_+{}|:\"<>?`~\\-=\\[\\];',./]).{8,30}$"
+      )
+    )
+    .message(
+      "Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character"
+    ),
+});
 
 const Login = () => {
+  const [loginData, setLoginData] = React.useState({ email: "", password: "" });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setLoginData((prev) => ({ ...prev, [name]: value }));
+  };
+  const submitUser = async (e) => {
+    try {
+      e.preventDefault();
+      const { error } = loginSchema.validate(loginData);
+      if (error) throw { message: error.details[0].message };
+      const data = await loginUser(loginData);
+      console.log(data);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
   return (
     <section>
-      <form className="max-w-sm mx-auto gap-5 flex flex-col mt-14">
+      <form
+        onSubmit={submitUser}
+        className="max-w-sm mx-auto gap-5 flex flex-col mt-14"
+      >
         <h1 className="text-center text-3xl font-semibold ">
           <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
             Welcome to Blogify
@@ -21,6 +63,9 @@ const Login = () => {
             id="hs-floating-input-email-value"
             className="peer p-4 block w-full rounded-lg text-sm placeholder:text-transparent disabled:opacity-50 disabled:pointer-events-none focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2 bg-slate-100 border border-slate-300 outline-none focus:ring-1 focus:ring-emerald-500"
             placeholder="you@email.com"
+            name="email"
+            value={loginData.email}
+            onChange={handleChange}
           />
           <label
             htmlFor="hs-floating-input-email-value"
@@ -39,6 +84,9 @@ const Login = () => {
             id="hs-floating-input-passowrd-value"
             className="peer p-4 block w-full  rounded-lg text-sm placeholder:text-transparent disabled:opacity-50 disabled:pointer-events-none focus:pt-6  focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2 bg-slate-100 border border-slate-300 outline-none focus:ring-1  focus:ring-emerald-500"
             placeholder="********"
+            name="password"
+            value={loginData.password}
+            onChange={handleChange}
           />
           <label
             htmlFor="hs-floating-input-passowrd-value"
