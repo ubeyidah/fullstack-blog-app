@@ -8,6 +8,7 @@ import "dotenv/config";
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
+app.use("/uploads/postImages", express.static("uploads/postImages"));
 // routes
 app.use("/api/auth", authRoutes);
 app.use("/api/post", postRoutes);
