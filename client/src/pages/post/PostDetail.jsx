@@ -62,29 +62,36 @@ const PostDetail = () => {
   return (
     <section className="py-6">
       <div className="grid grid-col-1 w-fit">
-        <Link to="/">
-          <button
-            type="button"
-            className="inline-flex flex-shrink-0 justify-center items-center size-10 rounded-full text-gray-500 hover:bg-slate-100  focus:z-10 focus:outline-none focus:ring-2 focus:ring-emerald-300-500"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
+        <div className="flex justify-between">
+          <Link to="/">
+            <button
+              type="button"
+              className="inline-flex flex-shrink-0 justify-center items-center size-10 rounded-full text-gray-500 hover:bg-slate-100  focus:z-10 focus:outline-none focus:ring-2 focus:ring-emerald-300-500"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
-              />
-            </svg>
-          </button>
-        </Link>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+                />
+              </svg>
+            </button>
+          </Link>
+          <div className="flex items-center justify-center px-4 text-slate-500 py-1 sm:hidden">
+            {extractDate(post.createdAt)}
+          </div>
+        </div>
         <div className="border-b border-slate-300 my-3"></div>
-        <h1 className="font-bold text-2xl my-3 text-wrap">{post.title}</h1>
+        <h1 className="font-bold text-2xl my-3 text-wrap text-center">
+          {post.title}
+        </h1>
         <p className="text-slate-600 mb-4">{post.summary}</p>
 
         <div>
@@ -111,7 +118,7 @@ const PostDetail = () => {
             </div>
           </div>
           <div className="flex gap-3">
-            <div className="bg-slate-50 px-4 border flex items-center justify-center border-slate-200 shadow-sm text-slate-500 py-1 rounded-full">
+            <div className="bg-slate-50 px-4 border flex items-center justify-center border-slate-200 shadow-sm text-slate-500 py-1 rounded-full max-sm:hidden">
               {extractDate(post.createdAt)}
             </div>
             {isOwnerOfThisPost && (
