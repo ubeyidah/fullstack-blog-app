@@ -61,16 +61,6 @@ const PostDetail = () => {
 
   return (
     <section className="py-6">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente illo
-      provident veniam iste, perspiciatis unde dolores eius accusantium rerum,
-      quos assumenda error quia sed ut necessitatibus dolor doloribus cumque
-      quod nam. Aut, sunt. Tempore impedit culpa recusandae optio modi
-      praesentium a, doloribus vero neque laborum rem ea libero. Expedita
-      tempora nobis, eos perspiciatis repudiandae delectus quia! Ratione
-      accusamus, nemo cumque molestias corporis ullam ex reiciendis rerum dicta
-      saepe odit magni quisquam autem pariatur cupiditate exercitationem
-      architecto? Quisquam odio nemo laboriosam, fugiat voluptatibus odit harum
-      totam modi ad, itaque, maiores saepe.
       <div className="grid grid-col-1 w-fit">
         <Link to="/">
           <button
