@@ -1,10 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { extractDate } from "../utils/utils";
 
-const extractDate = (date) => {
-  const publishDate = new Date(date);
-  return publishDate.toLocaleString();
-};
 const Post = ({ _id, title, summary, image, author, createdAt }) => {
   return (
     <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-4">

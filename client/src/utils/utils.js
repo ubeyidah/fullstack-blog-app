@@ -1,3 +1,5 @@
+import { format, render, cancel, register } from "timeago.js";
+
 export function setSessionStorageItem(value, expiryInDays = 20) {
   const now = new Date();
   // Set the expiration time in milliseconds
@@ -32,3 +34,7 @@ export function getSessionStorageItem(key = "blogifyAuth") {
 export function removeSessionStorageItem(key = "blogifyAuth") {
   sessionStorage.removeItem(key);
 }
+
+export const extractDate = (date) => {
+  return format(new Date(date));
+};

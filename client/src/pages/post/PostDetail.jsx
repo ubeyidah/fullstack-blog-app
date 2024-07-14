@@ -2,17 +2,14 @@ import React, { useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getPost } from "../../utils/api";
 import { useAuthContext } from "../../context/AuthContext";
-const extractDate = (date) => {
-  const publishDate = new Date(date);
-  return publishDate.toLocaleString();
-};
+import { extractDate } from "../../utils/utils";
+
 const PostDetail = () => {
   const [post, setPost] = React.useState(null);
   const [error, setError] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const { user } = useAuthContext();
   const isOwnerOfThisPost = user?._id === post?.author._id ? true : false;
-  console.log(isOwnerOfThisPost);
   const { id } = useParams();
 
   React.useEffect(() => {
