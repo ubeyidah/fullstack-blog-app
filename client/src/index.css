@@ -10,13 +10,25 @@
 
 ul {
   list-style: disc;
-  padding: 0 18px;
+  padding: 0 40px;
 }
 ol {
   list-style: decimal;
-  padding: 0 18px;
+  padding: 0 40px;
 }
 .content a {
   color: blue;
   text-decoration: underline;
+}
+.content h1 {
+  font-size: 26px;
+}
+.content h2 {
+  font-size: 19px;
+}
+
+.content blockquote {
+  background: #e2e2e2;
+  padding: 1px 6px;
+  border-left: 6px solid black;
 }
